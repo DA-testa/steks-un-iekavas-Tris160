@@ -1,7 +1,7 @@
 # python3 Marks Kacens-Adamovics,221RDB461
 
 from collections import namedtuple
-import requests
+
 Bracket = namedtuple("Bracket", ["char", "position"])
 
 
@@ -13,7 +13,7 @@ def find_mismatch(text):
     opening_brackets_stack = []
     for i, next in enumerate(text):
         if next in "([{":
-            opening_bracekets_stack.append(Bracet(next, i - 1))
+            opening_bracekets_stack.append(Bracet(next, i + 1))
 
         if next in ")]}":
           if not opening_bracets_stack:
@@ -28,13 +28,14 @@ def find_mismatch(text):
           return "Success"
 def main():
     cont = input()
-    if "I" in cont:
+    if "F" in cont:
     text = input()
    mismatch = find_mismatch(text)
    print(mismatch)
     # Printing answer, write your code here
 else:
-text = input()
+open(cont, "r") as f:
+    text = f.read()
 mismatch = find_mismatch(text)
 print(mismatch)
 
