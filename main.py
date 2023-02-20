@@ -13,31 +13,30 @@ def find_mismatch(text):
     opening_brackets_stack = []
     for i, next in enumerate(text):
         if next in "([{":
-            opening_bracekets_stack.append(Bracet(next, i + 1))
+            opening_brackets_stack.append(Bracket(next, i + 1))
 
         if next in ")]}":
-          if not opening_bracets_stack:
-          return i + 1
-          if not are_matching(opening_bracets_stack[-1].char, next):
-          return i + 1
+            if not opening_brackets_stack:
+                return i + 1
+            if not are_matching(opening_brackets_stack[-1].char, next):
+                return i + 1
+            opening_brackets_stack.pop()
+    if opening_brackets_stack:
+        return opening_brackets_stack[0].position
+    else:
+        return "Success"
 
-          opening_bracets_stack.pop()
-          if opening_bracets_stack:
-          return opening_bracets_stack[0].position
-          else:
-          return "Success"
 def main():
     cont = input()
     if "F" in cont:
-    text = input()
-   mismatch = find_mismatch(text)
-   print(mismatch)
+        with open(cont, "r") as f:
+            text = f.read()
+        text = input()
     # Printing answer, write your code here
-else:
-open(cont, "r") as f:
-    text = f.read()
-mismatch = find_mismatch(text)
-print(mismatch)
+    else:
+        cont = input()
+    mismatch = find_mismatch(cont)
+    print(mismatch)
 
 if __name__ == "__main__":
     main()
