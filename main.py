@@ -1,4 +1,4 @@
-# python3
+# python3 Marks Kacens-Adamovics,221RDB461
 
 from collections import namedtuple
 
@@ -13,19 +13,30 @@ def find_mismatch(text):
     opening_brackets_stack = []
     for i, next in enumerate(text):
         if next in "([{":
-            # Process opening bracket, write your code here
-            pass
+            opening_brackets_stack.append(Bracket(next, i + 1))
 
         if next in ")]}":
-            # Process closing bracket, write your code here
-            pass
-
+            if not opening_brackets_stack:
+                return i + 1
+            if not are_matching(opening_brackets_stack[-1].char, next):
+                return i + 1
+            opening_brackets_stack.pop()
+    if opening_brackets_stack:
+        return opening_brackets_stack[0].position
+    else:
+        return "Success"
 
 def main():
-    text = input()
-    mismatch = find_mismatch(text)
+    cont = input()
+    if "F" in cont:
+        with open(cont, "r") as f:
+            text = f.read()
+        text = input()
     # Printing answer, write your code here
-
+    else:
+        cont = input()
+    mismatch = find_mismatch(cont)
+    print(mismatch)
 
 if __name__ == "__main__":
     main()
